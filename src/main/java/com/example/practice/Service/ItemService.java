@@ -1,6 +1,7 @@
 package com.example.practice.Service;
 
 import com.example.practice.Entity.Item;
+import com.example.practice.Exception.ItemNotFoundException;
 import com.example.practice.Repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -26,12 +27,13 @@ public class ItemService {
         return result;
     }
 
-    public Optional<Item> findById(Long id) {
+    public Item findById(Long id) {
         Optional<Item> result = itemRepository.findById(id);
         if (result.isPresent()) {
-            return result;
+            System.out.println(result.get());
+            return result.get();
         } else {
-            throw new Exception("Can not found");
+            throw new ItemNotFoundException("Can not found");
         }
     }
 }
