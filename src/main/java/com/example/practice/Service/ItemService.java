@@ -36,4 +36,12 @@ public class ItemService {
             throw new ItemNotFoundException("Can not found");
         }
     }
+
+    public void editItem(Long id, String title, Integer price){
+        Item editedItem = new Item();
+        editedItem.setId(id);
+        editedItem.setTitle(title);
+        editedItem.setPrice(price);
+        itemRepository.save(editedItem);
+    }
 }

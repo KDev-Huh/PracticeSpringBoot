@@ -44,9 +44,17 @@ public class ItemController {
         model.addAttribute("item", result);
         return "detail.html";
     }
-    //ItemController.java
+
     @GetMapping("/edit/{id}")
-    String edit(@PathVariable Long id, Model model) {
+    String editPage(@PathVariable Long id, Model model) {
+        Item result = itemService.findById(id);
+        model.addAttribute("item", result);
         return "edit.html";
+    }
+
+    @PostMapping("/edit")
+    String edit(@RequestParam Long id, @RequestParam String title, @RequestParam Integer price) {
+        itemService.editItem(id, title, price);
+        return "redirect:/list";
     }
 }
